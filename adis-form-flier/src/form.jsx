@@ -15,6 +15,7 @@ const Form = () => {
   const [image, setImage] = useState("");
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const initialValues = {
     name: "",
@@ -43,6 +44,7 @@ const Form = () => {
   };
 
   const insertFormDetails = () => {
+    setLoading(true);
     const url = `${apiURL}`;
     const formData = new FormData();
     formData.append("name", name);
@@ -51,19 +53,21 @@ const Form = () => {
     formData.append("country", country);
     formData.append("image", image);
     console.log(formData, "form details payload");
-
-    axios.post(url, formData).then((response) => {
-      console.log(response, "response from inserting form data");
-      let userDetail = JSON.stringify(response.data.daata);
-      localStorage.setItem("ADIS_USER", userDetail);
-      alert(response.data.message);
-      if (response.data.message === "Thank you for Joining") {
-        navigate("/flier");
-      } else {
-        alert(response.message);
-        navigate("/");
-      }
-    });
+    setTimeout(() => {
+      setLoading(false);
+      axios.post(url, formData).then((response) => {
+        console.log(response, "response from inserting form data");
+        let userDetail = JSON.stringify(response.data.daata);
+        localStorage.setItem("ADIS_USER", userDetail);
+        alert(response.data.message);
+        if (response.data.message === "Thank you for Joining") {
+          navigate("/flier");
+        } else {
+          alert(response.message);
+          navigate("/");
+        }
+      });
+    }, 5000);
   };
 
   useEffect(() => {
@@ -187,9 +191,12 @@ const Form = () => {
             <div className="m-4">
               <button
                 type="submit"
-                className="text-center p-3 text-white text-lg font-bold bg-purple-600 w-full h-[48px] border rounded-[5px]"
+                className={`text-center p-3 text-white text-lg font-bold bg-purple-600 w-full h-[48px] border rounded-[5px] ${
+                  loading ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+                disabled={loading}
               >
-                Submit
+                {loading ? "Submitting..." : "Submit"}
               </button>
             </div>
           </form>
