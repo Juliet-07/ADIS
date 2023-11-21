@@ -53,7 +53,7 @@ const Flier = () => {
         </div>
       </div>
       <div
-        className="h-[60px] bg-purple-900 flex items-center justify-center font-semibold text-white rounded w-[350px] md:w-[500px] my-10 cursor-pointer"
+        className="h-10 md:h-[60px] bg-purple-900 flex items-center justify-center font-semibold text-white rounded w-[300px] md:w-[500px] my-10 cursor-pointer"
         onClick={handleDownload}
       >
         Download
