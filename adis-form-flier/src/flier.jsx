@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import FlierImage from "./assets/flier.jpg";
+import FlierImage from "./assets/flier.png";
 import axios from "axios";
 import domtoimage from "dom-to-image";
 
@@ -38,10 +38,10 @@ const Flier = () => {
   return (
     <div className="flex flex-col items-center justify-center mt-[200px] md:mt-10 bg-transparent">
       <div className="relative" id="flier-content">
-        <div className="w-[350px] h-[350px] md:w-[500px] md:h-[500px]">
-          <img src={FlierImage} />
+        <div className="w-full h-full">
+          <img src={FlierImage} className="w-[320px] h-[320px] md:w-[500px] md:h-[500px]" />
         </div>
-        <div className="w-[150px] md:w-[250px] flex flex-col items-center justify-center bg-green-70 absolute bottom-3 md:bottom-[35px] left-2 md:-right-0 md:-left-2">
+        <div className="w-[150px] md:w-[250px] flex flex-col items-center justify-center bg-green-70 absolute bottom-3 md:bottom-[35px] -left-0 md:-right-0 md:-left-1">
           {pic && (
             <img
               src={pic}

@@ -77,7 +77,7 @@ const Form = () => {
         const data = await response.json();
         const detail = data.map((country) => ({
           label: country.name,
-          value: country.alpha2Code,
+          value: country.name,
           flag: country.flag, // Assuming flags is an array
         }));
         console.log(data, "country info");
